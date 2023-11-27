@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500" rel="stylesheet">
+    <style>
+        /* Reset some default styles */
+        body, h1, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Global styles */
+        body {
+            font-family: "Poppins", sans-serif;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: url('entrance_master/entrance_master_logo.jpg') no-repeat center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        /* Registration form container */
+        .wrapper {
+            position: relative;
+            width: 420px;
+            background: #fff;
+            border: 2px solid rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+            padding: 30px 40px;
+            backdrop-filter: blur(20px);
+            color: #000;
+            border-radius: 10px;
+        }
+
+        .wrapper h1 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Input box styles */
+        .input-box {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            margin-bottom: 20px;
+            border: 2px solid #000;
+            border-radius: 40px;
+        }
+
+        .input-box input {
+            width: 85%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            font-size: 16px;
+            color: #333;
+            padding: 10px 20px;
+            outline: none;
+        }
+
+        .input-box input::placeholder {
+            color: #777;
+        }
+
+        /* Password visibility toggle button styles */
+        .password-toggle {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        /* Select box styles */
+        .select-box {
+            width: 100%;
+            margin-bottom: 20px;
+            border: 2px solid #000;
+            border-radius: 40px;
+        }
+
+        .select-box select {
+            width: 100%;
+            height: 50px;
+            border: none;
+            font-size: 16px;
+            color: #333;
+            padding: 10px 15px;
+            background: transparent;
+            outline: none;
+        }
+
+        /* Register button styles */
+        .wrapper .btn {
+            width: 100%;
+            height: 45px;
+            background: #0abe0a;
+            border: none;
+            outline: none;
+            border-radius: 48px;
+            box-shadow: 0 0 18px rgba(0, 0, 0, 1);
+            cursor: pointer;
+            font-size: 16px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* Validation error message styles */
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* Back link styles */
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            text-decoration: none;
+            color: #000;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <a href="loginpage.html" class="back-link">←</a>
+        <h1>Registration</h1>
+        <div class="input-box">
+            <input type="text" id="username" placeholder="Enter your full name">
+        </div>
+        <div class="input-box">
+            <input type="email" id="email" placeholder="Enter your email">
+        </div>
+        <div class="input-box">
+            <input type="pan no" id="pan no" placeholder="Enter your pan no">
+        </div>
+        <div class="input-box">
+            <input type="tel" id="phone" placeholder="Enter your phone number">
+        </div>
+        <div class="select-box">
+            <select id="class">
+                <option value="" disabled selected>Type of your business</option>
+                <option value="small scale">Small scale</option>
+                <option value="Medium scale">Medium scale</option>
+                <option value="Large scale">Large scale</option>
+
+            </select>
+        </div>
+        <div class="input-box">
+            <input type="password" id="password" placeholder="Enter your password">
+            <span class="password-toggle" onclick="togglePasswordVisibility()">&#128065;</span>
+        </div>
+      
+    
+      
+       
+        <button type="submit" class="btn" onclick="registerUser()">Register</button>
+        <div class="error-message" id="error-message"></div>
+    </div>
+
+    <script>
+        let passwordVisible = false;
+        const passwordField = document.getElementById('password');
+
+        function togglePasswordVisibility() {
+            passwordVisible = !passwordVisible;
+            passwordField.type = passwordVisible ? 'text' : 'password';
+        }
+
+        function registerUser() {
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const selectedClass = document.getElementById('class').value;
+            const selectedFaculty = document.getElementById('faculty').value;
+
+            if (!username || !email || !phone || !password || selectedClass === "" || selectedFaculty === "") {
+                document.getElementById('error-message').textContent = "Please fill in all fields.";
+                return;
+            }
+
+            // Perform registration logic here (e.g., send data to server)
+            // If registration is successful, you can redirect the user or perform other actions
+
+            document.getElementById('error-message').textContent = "";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Reset some default styles */
+        body, h1, p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Global styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('Login page.jpg') no-repeat center;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Container for the login form */
+        .login-container {
+            position: relative;
+            width: 350px; /* Adjusted width */
+            background: #f2f2f2;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px 40px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            overflow: hidden; /* Hide overflow to contain the pseudo-element animation */
+        }
+
+        /* Animated line pseudo-element */
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%; /* Initially position outside the container */
+            width: 200%;
+            height: 5px;
+            background-color: #7700ff;
+            animation: animateLine 3s linear infinite; /* Animation settings */
+        }
+
+        /* Keyframes for the line animation */
+        @keyframes animateLine {
+            0% {
+                left: 50%; /* Start from outside the container */
+            }
+            100% {
+                left: 150%; /* Move to the right beyond the container's width */
+            }
+            
+        }
+        /* Container for the login form */
+        .login-container {
+            width: 350px; /* Adjusted width */
+            background: #f2f2f2;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px 40px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-container h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Input box styles */
+        .input-box {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-box input {
+            width: 100%;
+            height: 45px;
+            background: #f9f9f9;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+            padding: 10px;
+            outline: none;
+            border: 1px solid #ddd;
+        }
+
+        .input-box input::placeholder {
+            color: #999;
+        }
+
+        /* Style for the eye icon */
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        /* Login button styles */
+        .btn-box {
+            margin-top: 20px;
+        }
+
+        .login-container .btn {
+            width: 100%;
+            height: 45px;
+            background: #007bff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Action links */
+        .action-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 10px; /* Add some bottom margin */
+        }
+
+        .forgot-password-link,
+        .register-link {
+            flex-basis: 50%; /* Occupy half of the container */
+        }
+
+        .forgot-password-link a,
+        .register-link a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .remember-me-box {
+            text-align: left; /* Align to the left */
+            width: 100%; /* Occupy full width */
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Form -->
+    <div class="login-container">
+        <h1>Login To Go Digital</h1>
+        <div class="input-box">
+            <input type="text" id="username" placeholder="E-mail">
+        </div>
+        <div class="input-box">
+            <input type="password" id="password" placeholder="Password">
+            <i class="eye-icon" id="togglePassword" onclick="togglePasswordVisibility()">👁️</i>
+        </div>
+        <div class="action-links">
+            <div class="forgot-password-link">
+                <a href="forgetpassword.html">Forgot Password?</a>
+            </div>
+            <div class="register-link">
+                <a href="registrationpage.html">Register</a>
+            </div>
+        </div>
+        <div class="remember-me-box">
+            <label>
+                <input type="checkbox" id="rememberMe"> Remember Me
+            </label>
+        </div>
+        <div class="btn-box">
+            <button type="button" class="btn" onclick="login()">Login</button>
+        </div>
+    </div>
+
+    <script>
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById("password");
+            var togglePasswordButton = document.getElementById("togglePassword");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                togglePasswordButton.textContent = "👁️";
+            } else {
+                passwordInput.type = "password";
+                togglePasswordButton.textContent = "👁️";
+            }
+        }
+
+        function login() {
+            var enteredUsername = document.getElementById("username").value;
+            var enteredPassword = document.getElementById("password").value;
+            var rememberMe = document.getElementById("rememberMe").checked;
+
+            var allowedUsername = "admin";
+            var allowedPassword = "admin01";
+
+            if (!enteredUsername || !enteredPassword) {
+                alert("Please enter both a username and password.");
+                return;
+            }
+
+            if (enteredUsername === allowedUsername && enteredPassword === allowedPassword) {
+                window.location.href = "page-01.html";
+            } else {
+                alert("Invalid username or password. Please try again.");
+            }
+        }
+    </script>
+</body>
+</html>

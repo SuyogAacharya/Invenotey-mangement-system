@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Inventory Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+          /* Styles for the logo */
+          .logo-container {
+            position: relative;
+            text-align: right;
+        }
+
+        .logo {
+            position: absolute;
+            top: -50px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+
+        .additional-info {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 10px;
+            background-color: #696464;
+            border: 1px solid #747373;
+            padding: 10px;
+            z-index: 999;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Inventory Management System</h1>
+        <div class="logo-container">
+            <!-- Logo -->
+            <img src="logo.jpg" alt="Logo" class="logo">
+            <!-- Additional Info -->
+            <div class="additional-info">
+                <p>SHOP NAME: Your Shop</p>
+                <p>PAN NO: Your PAN Number</p>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be populated dynamically -->
+                <tr>
+                    <td>Product A</td>
+                    <td>50</td>
+                    <td>$10.99</td>
+                    <td>
+                        <button class="btn">Edit</button>
+                        <button class="btn">Delete</button>
+                     <button class="btn">Add product</button>
+                    </td>
+                </tr>
+                <!-- More product rows can be added dynamically -->
+            </tbody>
+        </table>
+        <form>
+            <h2>Sold Product</h2>
+            <div class="form-group">
+                <label for="productName">Product Name:</label>
+                <input type="text" id="productName" name="productName" required>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" step="0.01" required>
+            </div>
+            <button type="submit" class="btn">Sold </button>
+        </form>
+        <form>
+            <h2>Add Product</h2>
+            <div class="form-group">
+                <label for="productName">Product Name:</label>
+                <input type="text" id="productName" name="productName" required>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" step="0.01" required>
+            </div>
+            <button type="submit" class="btn">Add Product</button>
+        </form>
+    </div>
+    
+    <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            const logo = document.querySelector('.logo');
+            const additionalInfo = document.querySelector('.additional-info');
+
+            // Toggle additional info visibility on logo click
+            logo.addEventListener('click', function () {
+                additionalInfo.style.display = additionalInfo.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const table = document.getElementById('productTable');
+            const soldProductForm = document.getElementById('soldProductForm');
+            const addProductForm = document.getElementById('addProductForm');
+
+            // Function to edit a row's data
+            function editRow(event) {
+                const row = event.target.closest('tr');
+                const cells = row.querySelectorAll('td');
+
+                // Extracting data from the row
+                const productName = cells[0].innerText;
+                const quantity = cells[1].innerText;
+                const price = cells[2].innerText;
+
+                // Allowing user to edit product details
+                const newProductName = prompt('Enter new product name:', productName);
+                const newQuantity = prompt('Enter new quantity:', quantity);
+                const newPrice = prompt('Enter new price:', price);
+
+                // Updating the row with edited details
+                cells[0].innerText = newProductName;
+                cells[1].innerText = newQuantity;
+                cells[2].innerText = newPrice;
+            }
+
+            // Function to delete a row
+            function deleteRow(event) {
+                const row = event.target.closest('tr');
+                row.remove();
+            }
+
+            // Function to add a new product row
+            function addProductRow() {
+                const newRow = table.insertRow();
+                newRow.innerHTML = `
+                    <td>Product A</td>
+                    <td>50</td>
+                    <td>$10.99</td>
+                    <td>
+                        <button class="btnEdit">Edit</button>
+                        <button class="btnDelete">Delete</button>
+                        <button class="btnAdd">Add product</button>
+                    </td>
+                `;
+
+                // Adding event listeners to newly created buttons
+                const editBtn = newRow.querySelector('.btnEdit');
+                const deleteBtn = newRow.querySelector('.btnDelete');
+                const addBtn = newRow.querySelector('.btnAdd');
+
+                editBtn.addEventListener('click', editRow);
+                deleteBtn.addEventListener('click', deleteRow);
+                addBtn.addEventListener('click', addProductRow);
+            }
+
+            // Adding event listeners to existing buttons
+            const editButtons = document.querySelectorAll('.btnEdit');
+            const deleteButtons = document.querySelectorAll('.btnDelete');
+            const addButtons = document.querySelectorAll('.btnAdd');
+
+            editButtons.forEach(button => button.addEventListener('click', editRow));
+            deleteButtons.forEach(button => button.addEventListener('click', deleteRow));
+            addButtons.forEach(button => button.addEventListener('click', addProductRow));
+        });
+    </script>
+</body>
+
+</html>
